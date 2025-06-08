@@ -6,12 +6,8 @@
 
 #include "header.h"
 
-namespace lynx {
-
-struct State {
-  const Header H;
+struct lynx_State {
+  const lynx_Header H;
 };
-
-} // namespace lynx
 
 #endif

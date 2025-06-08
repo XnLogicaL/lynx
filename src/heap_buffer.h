@@ -4,25 +4,17 @@
 #ifndef LYNX_HEAP_BUFFER_H_
 #define LYNX_HEAP_BUFFER_H_
 
+#include "conf.h"
 #include <cstddef>
-#include <type_traits>
 
-namespace lynx {
-
-template <typename T> struct HeapBuffer {
-  static_assert(std::is_default_constructible_v<T>, "");
-
+template <typename T> struct lynx_HeapBuffer {
   T *data = NULL;
   size_t size = 0;
 
-  HeapBuffer(const size_t size);
-  HeapBuffer(const HeapBuffer &other);
-  HeapBuffer(HeapBuffer &&other);
+  lynx_HeapBuffer(const size_t size);
 
-  const HeapBuffer &operator=(const HeapBuffer &other);
-  const HeapBuffer &operator=(HeapBuffer &&other);
+  LYNX_COPY(lynx_HeapBuffer);
+  LYNX_MOVE(lynx_HeapBuffer);
 };
-
-} // namespace lynx
 
 #endif

@@ -6,9 +6,7 @@
 
 #include <cstdint>
 
-namespace lynx {
-
-enum Opcode : uint16_t {
+enum lynx_Opcode : uint16_t {
   LOP_NOP,
   LOP_CONST,
   LOP_ADD,
@@ -17,11 +15,9 @@ enum Opcode : uint16_t {
   LOP_DIV,
 };
 
-struct alignas(8) Instruction {
-  Opcode op;
+struct alignas(8) lynx_Instruction {
+  lynx_Opcode op;
   uint16_t a, b, c;
 };
-
-} // namespace lynx
 
 #endif

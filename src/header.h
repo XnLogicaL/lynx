@@ -4,34 +4,25 @@
 #ifndef LYNX_HEADER_H_
 #define LYNX_HEADER_H_
 
+#include "conf.h"
 #include <cstdint>
 
-// lynx in hex
-#define LYNX_MAGIC_VALUE 0x6c796e78
+struct lynx_Value;
+struct lynx_Proto;
 
-namespace lynx {
-
-struct Value;
-struct Proto;
-
-struct Header {
+struct lynx_Header {
   const uint32_t magic = LYNX_MAGIC_VALUE;
 
   uint32_t const_count;
   uint32_t proto_count;
 
-  Value *consts;
-  Proto *protos;
+  lynx_Value *consts;
+  lynx_Proto *protos;
 
-  Header() = default;
+  lynx_Header() = default;
 
-  Header(const Header &) = delete;
-  Header(Header &&) = delete;
-
-  const Header &operator=(const Header &) = delete;
-  const Header &operator=(Header &&) = delete;
+  LYNX_NO_COPY(lynx_Header);
+  LYNX_NO_MOVE(lynx_Header);
 };
-
-} // namespace lynx
 
 #endif
