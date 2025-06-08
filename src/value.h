@@ -6,7 +6,9 @@
 
 #include "conf.h"
 
-enum lynx_ValueKind {
+namespace lynx {
+
+enum ValueKind {
   LVK_NIL,
   LVK_INT,
   LVK_FLOAT,
@@ -18,23 +20,25 @@ enum lynx_ValueKind {
   LVK_TUPLE,
 };
 
-struct lynx_Value {
-  lynx_ValueKind kind;
+struct Value {
+  lynx::ValueKind kind;
   union {
-    lynx_Integer i;
-    lynx_Float f;
-    lynx_Boolean b;
+    int i;
+    float f;
+    bool b;
   } u;
 
-  lynx_Value();
-  explicit lynx_Value(lynx_Integer i);
-  explicit lynx_Value(lynx_Float f);
-  explicit lynx_Value(lynx_Boolean b);
+  Value();
+  explicit Value(lynx_Integer i);
+  explicit Value(lynx_Float f);
+  explicit Value(lynx_Boolean b);
 
-  ~lynx_Value();
+  ~Value();
 
-  LYNX_NO_COPY(lynx_Value);
-  LYNX_MOVE(lynx_Value);
+  LYNX_NO_COPY(Value);
+  LYNX_MOVE(Value);
 };
+
+} // namespace lynx
 
 #endif

@@ -9,18 +9,22 @@
 #include "heap_buffer.h"
 #include "instruction.h"
 
-struct lynx_State {
-  const lynx_Header H;
+namespace lynx {
 
-  const lynx_Instruction *pc;
+struct State {
+  const Header H;
 
-  lynx_Value *top;
+  const Instruction *pc;
 
-  lynx_HeapBuffer<lynx_Value> regs;
-  lynx_HeapBuffer<lynx_Value> stk;
+  Value *top;
 
-  LYNX_NO_COPY(lynx_State);
-  LYNX_NO_MOVE(lynx_State);
+  HeapBuffer<Value> regs;
+  HeapBuffer<Value> stk;
+
+  LYNX_NO_COPY(State);
+  LYNX_NO_MOVE(State);
 };
+
+} // namespace lynx
 
 #endif

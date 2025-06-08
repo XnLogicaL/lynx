@@ -7,15 +7,19 @@
 #include "conf.h"
 #include <cstddef>
 
-template <typename T> struct lynx_HeapBuffer {
+namespace lynx {
+
+template <typename T> struct HeapBuffer {
   T *data = NULL;
   size_t size = 0;
 
-  lynx_HeapBuffer(const size_t size);
-  ~lynx_HeapBuffer();
+  HeapBuffer(const size_t size);
+  ~HeapBuffer();
 
-  LYNX_COPY(lynx_HeapBuffer);
-  LYNX_MOVE(lynx_HeapBuffer);
+  LYNX_COPY(HeapBuffer);
+  LYNX_MOVE(HeapBuffer);
 };
+
+} // namespace lynx
 
 #endif

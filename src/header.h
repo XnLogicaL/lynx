@@ -8,17 +8,21 @@
 #include "heap_buffer.h"
 #include <cstdint>
 
-struct lynx_Value;
-struct lynx_Proto;
+namespace lynx {
 
-struct lynx_Header {
+struct Value;
+struct Proto;
+
+struct Header {
   const uint32_t magic = LYNX_MAGIC_VALUE;
 
-  lynx_HeapBuffer<lynx_Value> consts;
-  lynx_HeapBuffer<lynx_Proto> protos;
+  HeapBuffer<Value> consts;
+  HeapBuffer<Proto> protos;
 
-  LYNX_NO_COPY(lynx_Header);
-  LYNX_NO_MOVE(lynx_Header);
+  LYNX_NO_COPY(Header);
+  LYNX_NO_MOVE(Header);
 };
+
+} // namespace lynx
 
 #endif

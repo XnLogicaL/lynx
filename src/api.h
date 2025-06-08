@@ -7,11 +7,17 @@
 #include "conf.h"
 #include "header.h"
 #include "state.h"
+#include "value.h"
 
-LYNX_API void lynx_setregister(lynx_State *L, uint16_t reg, lynx_Value &&val);
-LYNX_API lynx_Value *lynx_getregister(lynx_State *L, uint16_t reg);
+namespace lynx {
 
-LYNX_API void lynx_push(lynx_State *L, lynx_Value &&val);
-LYNX_API lynx_Value *lynx_pop(lynx_State *L);
+LYNX_API void setregister(State *L, uint16_t reg, Value &&val);
+LYNX_API Value *getregister(State *L, uint16_t reg);
+
+LYNX_API void push(State *L, Value &&val);
+LYNX_API void drop(State *L);
+LYNX_API Value *pop(State *L);
+
+} // namespace lynx
 
 #endif
