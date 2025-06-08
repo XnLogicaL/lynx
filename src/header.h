@@ -5,6 +5,7 @@
 #define LYNX_HEADER_H_
 
 #include "conf.h"
+#include "heap_buffer.h"
 #include <cstdint>
 
 struct lynx_Value;
@@ -13,13 +14,8 @@ struct lynx_Proto;
 struct lynx_Header {
   const uint32_t magic = LYNX_MAGIC_VALUE;
 
-  uint32_t const_count;
-  uint32_t proto_count;
-
-  lynx_Value *consts;
-  lynx_Proto *protos;
-
-  lynx_Header() = default;
+  lynx_HeapBuffer<lynx_Value> consts;
+  lynx_HeapBuffer<lynx_Proto> protos;
 
   LYNX_NO_COPY(lynx_Header);
   LYNX_NO_MOVE(lynx_Header);
