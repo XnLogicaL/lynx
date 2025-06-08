@@ -13,6 +13,10 @@
 #define LYNX_API extern "C"
 #endif
 
+using lynx_Integer = int;
+using lynx_Float = float;
+using lynx_Boolean = bool;
+
 #define LYNX_NO_COPY(target)                                                   \
   target(const target &) = delete;                                             \
   const target &operator=(const target &) = delete;

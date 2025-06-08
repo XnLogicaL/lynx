@@ -12,6 +12,7 @@ template <typename T> struct lynx_HeapBuffer {
   size_t size = 0;
 
   lynx_HeapBuffer(const size_t size);
+  ~lynx_HeapBuffer();
 
   LYNX_COPY(lynx_HeapBuffer);
   LYNX_MOVE(lynx_HeapBuffer);

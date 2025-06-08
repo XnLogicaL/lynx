@@ -8,6 +8,10 @@ template <typename T>
 lynx_HeapBuffer<T>::lynx_HeapBuffer(const size_t size)
     : data(new T[size]), size(size) {}
 
+template <typename T> lynx_HeapBuffer<T>::~lynx_HeapBuffer<T>() {
+  delete[] data;
+}
+
 template <typename T>
 lynx_HeapBuffer<T>::lynx_HeapBuffer(const lynx_HeapBuffer<T> &other)
     : data(new T[other.size]), size(other.size) {
