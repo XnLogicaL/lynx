@@ -4,11 +4,13 @@
 #ifndef LYNX_STATE_H_
 #define LYNX_STATE_H_
 
-#include "common.h"
+#include "header.h"
 
 namespace lynx {
 
-struct State {};
+struct State {
+  const Header H;
+};
 
 } // namespace lynx
 

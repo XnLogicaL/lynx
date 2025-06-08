@@ -4,7 +4,7 @@
 #ifndef LYNX_INSTRUCTION_H_
 #define LYNX_INSTRUCTION_H_
 
-#include "common.h"
+#include <cstdint>
 
 namespace lynx {
 
