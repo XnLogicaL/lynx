@@ -48,10 +48,9 @@ template <typename T>
 const HeapBuffer<T> &HeapBuffer<T>::operator=(HeapBuffer<T> &&other) {
   if (this != &other) {
     delete[] data;
-    data = new T[other.size];
+    data = other.data;
     cursor = data;
     size = other.size;
-    std::memcpy(data, other.data, size);
     other.data = NULL;
     other.cursor = NULL;
     other.size = 0;
