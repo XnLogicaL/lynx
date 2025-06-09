@@ -3,6 +3,7 @@
 
 #include "header.h"
 
+#include <bit>
 #include <cstdint>
 #include <cstring>
 #include <utility>
@@ -10,8 +11,6 @@
 #include "heap_buffer.h"
 #include "instruction.h"
 #include "value.h"
-
-#define BITCAST(T, expr) *(T*)&expr
 
 using namespace lynx;
 
@@ -94,12 +93,12 @@ static Value readvalue(FileBuf* B) {
     }
     case LVK_FLOAT: {
       uint32_t data = read32(B);
-      float val = BITCAST(float, data);
+      float val = std::bit_cast<float>(data);
       return Value(val);
     }
     case LVK_BOOLEAN: {
       uint8_t data = read8(B);
-      bool val = static_cast<uint8_t>(data);
+      bool val = static_cast<bool>(data);
       return Value(val);
     }
     default:
@@ -146,7 +145,7 @@ FileBuf lynx::headerencode(const Header& H) {
 
   Instruction* lastinsn = H.bytecode.data + H.bytecode.size;
   for (const Instruction* insn = H.bytecode.data; insn < lastinsn; ++insn) {
-    uint64_t data = BITCAST(uint64_t, *insn);
+    uint64_t data = std::bit_cast<uint64_t>(*insn);
     write64(&buf, data);
   }
 
@@ -176,7 +175,7 @@ Header lynx::headerdecode(FileBuf& buf) {
 
   for (size_t i = 0; i < icount; i++) {
     uint64_t data = read64(&buf);
-    *H.bytecode.cursor = BITCAST(Instruction, data);
+    *H.bytecode.cursor = std::bit_cast<Instruction>(data);
     ++H.bytecode.cursor;
   }
 
