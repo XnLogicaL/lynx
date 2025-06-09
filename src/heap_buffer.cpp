@@ -2,43 +2,60 @@
 // Licensed under GNU GPLv3.0 Copyright (C) 2025 XnLogicaL
 
 #include "heap_buffer.h"
+
+#include <cstddef>
 #include <cstring>
 
-template <typename T>
-lynx_HeapBuffer<T>::lynx_HeapBuffer(const size_t size)
-    : data(new T[size]), size(size) {}
+using namespace lynx;
 
-template <typename T> lynx_HeapBuffer<T>::~lynx_HeapBuffer<T>() {
+template <typename T>
+HeapBuffer<T>::HeapBuffer(const size_t size)
+    : data(new T[size]), cursor(data), size(size) {}
+
+template <typename T>
+HeapBuffer<T>::~HeapBuffer<T>() {
   delete[] data;
 }
 
 template <typename T>
-lynx_HeapBuffer<T>::lynx_HeapBuffer(const lynx_HeapBuffer<T> &other)
-    : data(new T[other.size]), size(other.size) {
+HeapBuffer<T>::HeapBuffer(const HeapBuffer<T> &other)
+    : data(new T[other.size]), cursor(data), size(other.size) {
   std::memcpy(data, other.data, size);
 }
 
 template <typename T>
-lynx_HeapBuffer<T>::lynx_HeapBuffer(lynx_HeapBuffer<T> &&other)
-    : data(other.data), size(other.size) {
+HeapBuffer<T>::HeapBuffer(HeapBuffer<T> &&other)
+    : data(other.data), cursor(data), size(other.size) {
   other.data = NULL;
+  other.cursor = NULL;
   other.size = 0;
 }
 
 template <typename T>
-const lynx_HeapBuffer<T> &
-lynx_HeapBuffer<T>::operator=(const lynx_HeapBuffer<T> &other) {
-  data = new T[other.size];
-  size = other.size;
-  std::memcpy(data, other.data, size);
+const HeapBuffer<T> &HeapBuffer<T>::operator=(const HeapBuffer<T> &other) {
+  if (this != &other) {
+    delete[] data;
+    data = new T[other.size];
+    cursor = data;
+    size = other.size;
+    std::memcpy(data, other.data, size);
+  }
+
+  return *this;
 }
 
 template <typename T>
-const lynx_HeapBuffer<T> &
-lynx_HeapBuffer<T>::operator=(lynx_HeapBuffer<T> &&other) {
-  data = new T[other.size];
-  size = other.size;
-  std::memcpy(data, other.data, size);
-  other.data = NULL;
-  other.size = 0;
+const HeapBuffer<T> &HeapBuffer<T>::operator=(HeapBuffer<T> &&other) {
+  if (this != &other) {
+    delete[] data;
+    data = new T[other.size];
+    cursor = data;
+    size = other.size;
+    std::memcpy(data, other.data, size);
+    other.data = NULL;
+    other.cursor = NULL;
+    other.size = 0;
+  }
+
+  return *this;
 }

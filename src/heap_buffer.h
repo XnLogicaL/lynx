@@ -4,13 +4,16 @@
 #ifndef LYNX_HEAP_BUFFER_H_
 #define LYNX_HEAP_BUFFER_H_
 
-#include "conf.h"
 #include <cstddef>
+
+#include "conf.h"
 
 namespace lynx {
 
-template <typename T> struct HeapBuffer {
-  T *data = NULL;
+template <typename T>
+struct HeapBuffer {
+  T* data = NULL;
+  T* cursor = NULL;
   size_t size = 0;
 
   HeapBuffer(const size_t size);
@@ -20,6 +23,6 @@ template <typename T> struct HeapBuffer {
   LYNX_MOVE(HeapBuffer);
 };
 
-} // namespace lynx
+}  // namespace lynx
 
 #endif

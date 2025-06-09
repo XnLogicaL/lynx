@@ -18,6 +18,9 @@ LYNX_API void push(State *L, Value &&val);
 LYNX_API void drop(State *L);
 LYNX_API Value *pop(State *L);
 
-} // namespace lynx
+LYNX_API void exec(State *L);
+LYNX_API void execstep(State *L);
+
+}  // namespace lynx
 
 #endif

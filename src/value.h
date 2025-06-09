@@ -39,6 +39,6 @@ struct Value {
   LYNX_MOVE(Value);
 };
 
-} // namespace lynx
+}  // namespace lynx
 
 #endif

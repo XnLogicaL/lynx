@@ -14,9 +14,9 @@ namespace lynx {
 struct State {
   const Header H;
 
-  const Instruction *pc;
+  const Instruction* pc;
 
-  Value *top;
+  Value* top;
 
   HeapBuffer<Value> regs;
   HeapBuffer<Value> stk;
@@ -25,6 +25,6 @@ struct State {
   LYNX_NO_MOVE(State);
 };
 
-} // namespace lynx
+}  // namespace lynx
 
 #endif

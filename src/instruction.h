@@ -22,6 +22,6 @@ struct alignas(8) Instruction {
   std::uint16_t a, b, c;
 };
 
-} // namespace lynx
+}  // namespace lynx
 
 #endif

@@ -4,25 +4,35 @@
 #ifndef LYNX_HEADER_H_
 #define LYNX_HEADER_H_
 
+#include <cstdint>
+
 #include "conf.h"
 #include "heap_buffer.h"
-#include <cstdint>
+#include "instruction.h"
+#include "value.h"
 
 namespace lynx {
 
-struct Value;
-struct Proto;
-
 struct Header {
-  const uint32_t magic = LYNX_MAGIC_VALUE;
+  uint32_t magic = LYNX_MAGIC_VALUE;
+  uint64_t flags;
 
   HeapBuffer<Value> consts;
-  HeapBuffer<Proto> protos;
+  HeapBuffer<Instruction> bytecode;
+
+  Header(const size_t const_count, const size_t insn_count)
+      : consts(const_count), bytecode(insn_count) {}
 
   LYNX_NO_COPY(Header);
-  LYNX_NO_MOVE(Header);
+  LYNX_MOVE(Header);
 };
 
-} // namespace lynx
+using FileBuf = HeapBuffer<uint8_t>;
+
+size_t headersize(const Header& H);
+FileBuf headerencode(const Header& H);
+Header headerdecode(FileBuf& buf);
+
+}  // namespace lynx
 
 #endif

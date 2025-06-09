@@ -3,12 +3,14 @@
 
 #include "value.h"
 
-lynx_Value::lynx_Value() : kind(LVK_NIL) {}
+using namespace lynx;
 
-lynx_Value::lynx_Value(lynx_Integer i) : kind(LVK_INT), u({.i = i}) {}
+Value::Value() : kind(LVK_NIL) {}
 
-lynx_Value::lynx_Value(lynx_Float f) : kind(LVK_FLOAT), u({.f = f}) {}
+Value::Value(int i) : kind(LVK_INT), u({.i = i}) {}
 
-lynx_Value::lynx_Value(lynx_Boolean b) : kind(LVK_BOOLEAN), u({.b = b}) {}
+Value::Value(float f) : kind(LVK_FLOAT), u({.f = f}) {}
 
-lynx_Value::~lynx_Value() {}
+Value::Value(bool b) : kind(LVK_BOOLEAN), u({.b = b}) {}
+
+Value::~Value() {}

@@ -17,20 +17,20 @@ using lynx_Integer = int;
 using lynx_Float = float;
 using lynx_Boolean = bool;
 
-#define LYNX_NO_COPY(target)                                                   \
-  target(const target &) = delete;                                             \
+#define LYNX_NO_COPY(target)       \
+  target(const target &) = delete; \
   const target &operator=(const target &) = delete;
 
-#define LYNX_NO_MOVE(target)                                                   \
-  target(target &&) = delete;                                                  \
+#define LYNX_NO_MOVE(target)  \
+  target(target &&) = delete; \
   const target &operator=(target &&) = delete;
 
-#define LYNX_COPY(target)                                                      \
-  target(const target &);                                                      \
+#define LYNX_COPY(target) \
+  target(const target &); \
   const target &operator=(const target &);
 
-#define LYNX_MOVE(target)                                                      \
-  target(target &&);                                                           \
+#define LYNX_MOVE(target) \
+  target(target &&);      \
   const target &operator=(target &&);
 
 #endif
