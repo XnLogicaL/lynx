@@ -20,8 +20,7 @@ struct Header {
   HeapBuffer<Value> consts;
   HeapBuffer<Instruction> bytecode;
 
-  Header(const size_t const_count, const size_t insn_count)
-      : consts(const_count), bytecode(insn_count) {}
+  Header() = default;
 
   LYNX_NO_COPY(Header);
   LYNX_MOVE(Header);
@@ -29,9 +28,9 @@ struct Header {
 
 using FileBuf = HeapBuffer<uint8_t>;
 
-size_t headersize(const Header& H);
-FileBuf headerencode(const Header& H);
-Header headerdecode(FileBuf& buf);
+size_t header_size(const Header& H);
+FileBuf header_encode(const Header& H);
+Header header_decode(FileBuf& buf);
 
 }  // namespace lynx
 

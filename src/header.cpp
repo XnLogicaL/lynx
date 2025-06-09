@@ -125,12 +125,12 @@ const Header& Header::operator=(Header&& other) {
   return *this;
 }
 
-size_t lynx::headersize(const Header& H) {
+size_t lynx::header_size(const Header& H) {
   return sizeof(H.magic) + sizeof(H.flags) + H.consts.size + H.bytecode.size;
 }
 
-FileBuf lynx::headerencode(const Header& H) {
-  FileBuf buf(headersize(H));
+FileBuf lynx::header_encode(const Header& H) {
+  FileBuf buf(header_size(H));
 
   write32(&buf, H.magic);
   write64(&buf, H.flags);
@@ -152,14 +152,12 @@ FileBuf lynx::headerencode(const Header& H) {
   return buf;
 }
 
-Header lynx::headerdecode(FileBuf& buf) {
+Header lynx::header_decode(FileBuf& buf) {
   buf.cursor = buf.data;  // reset cursor to ensure no funny shit happens
 
-  Header H(1, 1);
+  Header H;
 
-  // magic
-  read64(&buf);
-
+  H.magic = read64(&buf);
   H.flags = read64(&buf);
 
   uint32_t kcount = read32(&buf);

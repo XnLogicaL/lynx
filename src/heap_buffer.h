@@ -16,6 +16,7 @@ struct HeapBuffer {
   T* cursor = NULL;
   size_t size = 0;
 
+  HeapBuffer() = default;
   HeapBuffer(const size_t size);
   ~HeapBuffer();
 
