@@ -29,9 +29,9 @@ struct Value {
   } u;
 
   Value();
-  explicit Value(lynx_Integer i);
-  explicit Value(lynx_Float f);
-  explicit Value(lynx_Boolean b);
+  explicit Value(int i);
+  explicit Value(float f);
+  explicit Value(bool b);
 
   ~Value();
 
