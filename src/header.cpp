@@ -45,7 +45,7 @@ static void writevalue(FileBuf* B, const Value& val) {
       write32(B, val.u.i);
       break;
     case LVK_FLOAT: {
-      uint32_t data = *(uint32_t*)&val.u.f;  // fucked up bit hack
+      uint32_t data = std::bit_cast<uint32_t>(val.u.f);
       write32(B, data);
     } break;
     default:
@@ -112,7 +112,8 @@ Header::Header(Header&& other)
     : magic(other.magic),
       flags(other.flags),
       consts(std::move(other.consts)),
-      bytecode(std::move(other.bytecode)) {}
+      bytecode(std::move(other.bytecode)) {
+}
 
 const Header& Header::operator=(Header&& other) {
   if (this != &other) {
@@ -157,7 +158,7 @@ Header lynx::header_decode(FileBuf& buf) {
 
   Header H;
 
-  H.magic = read64(&buf);
+  H.magic = read32(&buf);
   H.flags = read64(&buf);
 
   uint32_t kcount = read32(&buf);
