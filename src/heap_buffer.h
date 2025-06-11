@@ -13,7 +13,7 @@ namespace lynx {
 template <typename T>
 struct HeapBuffer {
   T* data = NULL;
-  T* cursor = NULL;
+  mutable T* cursor = NULL;
   size_t size = 0;
 
   HeapBuffer() = default;

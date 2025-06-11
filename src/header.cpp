@@ -53,34 +53,34 @@ static void writevalue(FileBuf* B, const Value& val) {
   }
 }
 
-static uint8_t read8(FileBuf* B) {
+static uint8_t read8(const FileBuf* B) {
   uint8_t data = *B->cursor;
   ++B->cursor;
   return data;
 }
 
-static uint16_t read16(FileBuf* B) {
+static uint16_t read16(const FileBuf* B) {
   uint16_t data;
   std::memcpy(&data, B->cursor, 2);
   B->cursor += 2;
   return data;
 }
 
-static uint32_t read32(FileBuf* B) {
+static uint32_t read32(const FileBuf* B) {
   uint32_t data;
   std::memcpy(&data, B->cursor, 4);
   B->cursor += 4;
   return data;
 }
 
-static uint64_t read64(FileBuf* B) {
+static uint64_t read64(const FileBuf* B) {
   uint64_t data;
   std::memcpy(&data, B->cursor, 8);
   B->cursor += 8;
   return data;
 }
 
-static Value readvalue(FileBuf* B) {
+static Value readvalue(const FileBuf* B) {
   uint8_t kind = read8(B);
 
   switch (kind) {
@@ -153,7 +153,7 @@ FileBuf lynx::header_encode(const Header& H) {
   return buf;
 }
 
-Header lynx::header_decode(FileBuf& buf) {
+Header lynx::header_decode(const FileBuf& buf) {
   buf.cursor = buf.data;  // reset cursor to ensure no funny shit happens
 
   Header H;

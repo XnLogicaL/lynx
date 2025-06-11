@@ -30,7 +30,7 @@ using FileBuf = HeapBuffer<uint8_t>;
 
 size_t header_size(const Header& H);
 FileBuf header_encode(const Header& H);
-Header header_decode(FileBuf& buf);
+Header header_decode(const FileBuf& buf);
 
 }  // namespace lynx
 
